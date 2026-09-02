@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AirIQ | Settings</title>
+
+    <link
+        rel="stylesheet"
+        href="/settings.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <div class="app">
+
+
+        <!-- =====================================
+             SIDEBAR
+        ====================================== -->
+
+        <aside class="sidebar">
+
+
+            <!-- Brand -->
+
+            <div class="brand">
+
+                <div class="brand-mark">
+                    ✦
+                </div>
+
+                <span>AirIQ</span>
+
+            </div>
+
+
+            <!-- Navigation -->
+
+            <nav class="nav">
+
+
+                <a
+                    href="dashboard.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ▦
+                    </span>
+
+                    <span>
+                        Dashboard
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="campus-heatmap.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ☰
+                    </span>
+
+                    <span>
+                        Campus Heatmap
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="anomaly-log.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ⚠
+                    </span>
+
+                    <span>
+                        Anomaly Log
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="predictions.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ↗
+                    </span>
+
+                    <span>
+                        AQI Predictions
+                    </span>
+
+                </a>
+
+
+                
+
+                <a
+                    href="profile.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ◉
+                    </span>
+
+                    <span>
+                        User / Profile
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="about.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ⓘ
+                    </span>
+
+                    <span>
+                        About Project
+                    </span>
+
+                </a>
+
+
+            </nav>
+
+
+            <!-- Bottom Sidebar -->
+
+            <div class="sidebar-bottom">
+
+
+                <div class="sidebar-divider"></div>
+
+
+                <a
+                    href="settings.html"
+                    class="nav-item active"
+                >
+
+                    <span class="nav-glyph">
+                        ⚙
+                    </span>
+
+                    <span>
+                        Settings
+                    </span>
+
+                </a>
+
+
+                <div class="system-status">
+
+                    <span class="system-status-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            All Nodes Online
+                        </strong>
+
+                        <small>
+                            AirIQ system active
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </aside>
+
+
+        <!-- =====================================
+             MAIN CONTENT
+        ====================================== -->
+
+        <main class="main">
+
+
+            <!-- =====================================
+                 HEADER
+            ====================================== -->
+
+            <header class="topbar">
+
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        ACCOUNT & SYSTEM
+                    </span>
+
+                    <h1>
+                        Settings
+                    </h1>
+
+                    <p>
+                        Customize how AirIQ works for you.
+                    </p>
+
+                </div>
+
+
+                <div class="header-actions">
+
+
+                    <div class="save-status" id="save-status">
+
+                        Changes saved
+
+                    </div>
+
+
+                    <button
+                        class="save-btn"
+                        id="save-btn"
+                    >
+
+                        Save Changes
+
+                    </button>
+
+
+                    <div
+                        class="user-avatar"
+                        id="user-avatar"
+                    >
+                        U
+                    </div>
+
+
+                </div>
+
+
+            </header>
+
+
+            <!-- =====================================
+                 NOTIFICATIONS
+            ====================================== -->
+
+            <section class="settings-section">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            ALERT PREFERENCES
+                        </span>
+
+                        <h2>
+                            Notifications
+                        </h2>
+
+                        <p>
+                            Choose which AirIQ alerts you want
+                            to receive.
+                        </p>
+
+                    </div>
+
+
+                    <div class="section-icon">
+                        ♧
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <h3>
+                                Air Quality Alerts
+                            </h3>
+
+                            <p>
+                                Receive alerts when air quality
+                                reaches unhealthy levels.
+                            </p>
+
+                        </div>
+
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="air-quality-alerts"
+                            >
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <h3>
+                                Anomaly Alerts
+                            </h3>
+
+                            <p>
+                                Get notified when unusual sensor
+                                patterns are detected.
+                            </p>
+
+                        </div>
+
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="anomaly-alerts"
+                            >
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <h3>
+                                AQI Prediction Alerts
+                            </h3>
+
+                            <p>
+                                Receive warnings about predicted
+                                changes in air quality.
+                            </p>
+
+                        </div>
+
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="prediction-alerts"
+                            >
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="setting-row last-row">
+
+                        <div class="setting-info">
+
+                            <h3>
+                                Email Notifications
+                            </h3>
+
+                            <p>
+                                Send important AirIQ alerts to
+                                your registered email address.
+                            </p>
+
+                        </div>
+
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="email-notifications"
+                            >
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 DASHBOARD PREFERENCES
+            ====================================== -->
+
+            <section class="settings-section">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            DASHBOARD EXPERIENCE
+                        </span>
+
+                        <h2>
+                            Dashboard Preferences
+                        </h2>
+
+                        <p>
+                            Customize how data is displayed
+                            when using AirIQ.
+                        </p>
+
+                    </div>
+
+
+                    <div class="section-icon">
+                        ▦
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+
+                    <div class="setting-row select-row">
+
+                        <div class="setting-info">
+
+                            <h3>
+                                Default Dashboard View
+                            </h3>
+
+                            <p>
+                                Choose the page to open after
+                                signing in.
+                            </p>
+
+                        </div>
+
+
+                        <select id="default-view">
+
+                            <option value="dashboard">
+                                Dashboard
+                            </option>
+
+                            <option value="heatmap">
+                                Campus Heatmap
+                            </option>
+
+                            <option value="anomalies">
+                                Anomaly Log
+                            </option>
+
+                            <option value="predictions">
+                                AQI Predictions
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="setting-row select-row">
+
+                        <div class="setting-info">
+
+                            <h3>
+                                Auto-refresh Interval
+                            </h3>
+
+                            <p>
+                                Control how frequently live
+                                sensor data refreshes.
+                            </p>
+
+                        </div>
+
+
+                        <select id="refresh-interval">
+
+                            <option value="0">
+                                Off
+                            </option>
+
+                            <option value="5000">
+                                Every 5 seconds
+                            </option>
+
+                            <option value="10000">
+                                Every 10 seconds
+                            </option>
+
+                            <option value="30000">
+                                Every 30 seconds
+                            </option>
+
+                            <option value="60000">
+                                Every 1 minute
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="setting-row last-row select-row">
+
+                        <div class="setting-info">
+
+                            <h3>
+                                Chart Display
+                            </h3>
+
+                            <p>
+                                Select your preferred chart
+                                visualization style.
+                            </p>
+
+                        </div>
+
+
+                        <select id="chart-display">
+
+                            <option value="line">
+                                Line Charts
+                            </option>
+
+                            <option value="bar">
+                                Bar Charts
+                            </option>
+
+                            <option value="area">
+                                Area Charts
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 SYSTEM PREFERENCES
+            ====================================== -->
+
+            <section class="settings-section">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            SYSTEM DISPLAY
+                        </span>
+
+                        <h2>
+                            System Preferences
+                        </h2>
+
+                        <p>
+                            Configure display and regional
+                            preferences.
+                        </p>
+
+                    </div>
+
+
+                    <div class="section-icon">
+                        ⚙
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+
+                    <div class="setting-row select-row">
+
+                        <div class="setting-info">
+
+                            <h3>
+                                Temperature Unit
+                            </h3>
+
+                            <p>
+                                Choose how temperature readings
+                                are displayed.
+                            </p>
+
+                        </div>
+
+
+                        <select id="temperature-unit">
+
+                            <option value="celsius">
+                                Celsius °C
+                            </option>
+
+                            <option value="fahrenheit">
+                                Fahrenheit °F
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="setting-row select-row">
+
+                        <div class="setting-info">
+
+                            <h3>
+                                Time Format
+                            </h3>
+
+                            <p>
+                                Choose how time is displayed
+                                across the dashboard.
+                            </p>
+
+                        </div>
+
+
+                        <select id="time-format">
+
+                            <option value="12">
+                                12-hour
+                            </option>
+
+                            <option value="24">
+                                24-hour
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="setting-row last-row select-row">
+
+                        <div class="setting-info">
+
+                            <h3>
+                                Language
+                            </h3>
+
+                            <p>
+                                Choose your preferred interface
+                                language.
+                            </p>
+
+                        </div>
+
+
+                        <select id="language">
+
+                            <option value="english">
+                                English
+                            </option>
+
+                            <option value="malayalam">
+                                Malayalam
+                            </option>
+
+                            <option value="hindi">
+                                Hindi
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 PRIVACY
+            ====================================== -->
+
+            <section class="settings-section">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            PRIVACY & DATA
+                        </span>
+
+                        <h2>
+                            Privacy
+                        </h2>
+
+                        <p>
+                            Control your profile visibility and
+                            data sharing preferences.
+                        </p>
+
+                    </div>
+
+
+                    <div class="section-icon">
+                        ◉
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+
+                    <div class="setting-row">
+
+                        <div class="setting-info">
+
+                            <h3>
+                                Public Profile Visibility
+                            </h3>
+
+                            <p>
+                                Allow your profile information
+                                to be visible to other users.
+                            </p>
+
+                        </div>
+
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="public-profile"
+                            >
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="setting-row last-row select-row">
+
+                        <div class="setting-info">
+
+                            <h3>
+                                Data Sharing Preferences
+                            </h3>
+
+                            <p>
+                                Choose how your AirIQ usage data
+                                can be used.
+                            </p>
+
+                        </div>
+
+
+                        <select id="data-sharing">
+
+                            <option value="anonymous">
+                                Anonymous analytics only
+                            </option>
+
+                            <option value="research">
+                                Allow research use
+                            </option>
+
+                            <option value="none">
+                                Do not share data
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 ADMIN SETTINGS
+            ====================================== -->
+
+            <section
+                class="settings-section admin-section"
+                id="admin-section"
+            >
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            ADMINISTRATION
+                        </span>
+
+                        <h2>
+                            Admin Settings
+                        </h2>
+
+                        <p>
+                            Advanced controls for AirIQ
+                            administrators.
+                        </p>
+
+                    </div>
+
+
+                    <div class="section-icon">
+                        ★
+                    </div>
+
+                </div>
+
+
+                <div class="admin-grid">
+
+
+                    <button class="admin-card">
+
+                        <span class="admin-icon">
+                            ◉
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Manage Users
+                            </h3>
+
+                            <p>
+                                Manage accounts, roles, and access.
+                            </p>
+
+                        </div>
+
+                        <span class="admin-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <button class="admin-card">
+
+                        <span class="admin-icon">
+                            ▦
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Manage Sensor Nodes
+                            </h3>
+
+                            <p>
+                                Monitor and configure IoT nodes.
+                            </p>
+
+                        </div>
+
+                        <span class="admin-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <button class="admin-card">
+
+                        <span class="admin-icon">
+                            ✦
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Retrain ML Models
+                            </h3>
+
+                            <p>
+                                Update anomaly and prediction models.
+                            </p>
+
+                        </div>
+
+                        <span class="admin-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="admin-card"
+                        id="export-data-btn"
+                    >
+
+                        <span class="admin-icon">
+                            ↓
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Export System Data
+                            </h3>
+
+                            <p>
+                                Download available monitoring data.
+                            </p>
+
+                        </div>
+
+                        <span class="admin-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 FOOTER
+            ====================================== -->
+
+            <footer class="settings-footer">
+
+                <span>
+                    AirIQ Settings
+                </span>
+
+                <span>
+                    Your preferences are saved locally.
+                </span>
+
+            </footer>
+
+
+        </main>
+
+
+    </div>
+
+
+    <script src="/settings.js"></script>
+
+
+</body>
+
+</html>

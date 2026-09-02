@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AirIQ | AI Anomaly Detection</title>
+
+    <link rel="stylesheet" href="/anomaly-log.css">
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+
+
+
+<body>
+
+    <div class="app">
+
+
+        <!-- =====================================
+             SIDEBAR
+        ====================================== -->
+
+        <aside class="sidebar">
+
+
+            <!-- Brand -->
+
+            <div class="brand">
+
+                <div class="brand-mark">
+                    ✦
+                </div>
+
+                <span>AirIQ</span>
+
+            </div>
+
+
+            <!-- Navigation -->
+
+            <nav class="nav">
+
+
+                <a
+                    href="/dashboard"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ▦
+                    </span>
+
+                    <span>
+                        Dashboard
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="campus-heatmap.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ☰
+                    </span>
+
+                    <span>
+                        Campus Heatmap
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="anomaly-log.html"
+                    class="nav-item active"
+                >
+
+                    <span class="nav-glyph">
+                        ⚠
+                    </span>
+
+                    <span>
+                        Anomaly Log
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="predictions.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ↗
+                    </span>
+
+                    <span>
+                        AQI Predictions
+                    </span>
+
+                </a>
+
+
+                
+
+                </a>
+
+
+                <a
+                    href="/profile"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ◉
+                    </span>
+
+                    <span>
+                        User / Profile
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="about.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ⓘ
+                    </span>
+
+                    <span>
+                        About Project
+                    </span>
+
+                </a>
+
+
+            </nav>
+
+
+            <!-- Sidebar Bottom -->
+
+        <div class="sidebar-footer">
+
+            <a
+                href="settings.html"
+                class="nav-item"
+            >
+                <span class="nav-glyph">⚙</span>
+                Settings
+            </a>
+
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        All Nodes Online
+                    </strong>
+
+                    <small>
+                        AirIQ system active
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        </aside>
+
+
+        <!-- =====================================
+             MAIN CONTENT
+        ====================================== -->
+
+        <main class="main">
+
+
+            <!-- Header -->
+
+            <header class="topbar">
+
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        AIR QUALITY INTELLIGENCE
+                    </span>
+
+                    <h1>
+                        AI Anomaly Detection
+                    </h1>
+
+                    <p>
+                        Monitor unusual pollution events detected
+                        from live sensor patterns.
+                    </p>
+
+                </div>
+
+
+                <div class="header-actions">
+
+
+                    <div
+                        class="last-updated"
+                        id="last-updated"
+                    >
+
+                        Loading...
+
+                    </div>
+
+
+                    <button
+                        id="refresh-btn"
+                        class="refresh-btn"
+                    >
+
+                        ↻ Refresh
+
+                    </button>
+
+
+                    <div
+                        class="user-avatar"
+                        id="user-avatar"
+                    >
+                        U
+                    </div>
+
+
+                </div>
+
+
+            </header>
+
+
+            <!-- =====================================
+                 SUMMARY CARDS
+            ====================================== -->
+
+            <section class="summary-grid">
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+                        ▦
+                    </div>
+
+                    <div>
+
+                        <span class="summary-label">
+                            Total Readings Today
+                        </span>
+
+                        <strong
+                            id="total-readings"
+                        >
+                            —
+                        </strong>
+
+                        <small>
+                            All sensor readings
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span class="summary-label">
+                            Normal Readings
+                        </span>
+
+                        <strong
+                            id="normal-readings"
+                        >
+                            —
+                        </strong>
+
+                        <small>
+                            Within safe thresholds
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card anomaly-card">
+
+                    <div class="summary-icon">
+                        ⚠
+                    </div>
+
+                    <div>
+
+                        <span class="summary-label">
+                            Anomalies Detected
+                        </span>
+
+                        <strong
+                            id="anomaly-count"
+                        >
+                            —
+                        </strong>
+
+                        <small>
+                            Unusual pollution events
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card risk-card">
+
+                    <div class="summary-icon">
+                        !
+                    </div>
+
+                    <div>
+
+                        <span class="summary-label">
+                            High-Risk Events
+                        </span>
+
+                        <strong
+                            id="high-risk-count"
+                        >
+                            —
+                        </strong>
+
+                        <small>
+                            Requires attention
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 ANOMALY LOG
+            ====================================== -->
+
+            <section class="content-card">
+
+
+                <div class="section-header">
+
+
+                    <div>
+
+                        <h2>
+                            Detected Anomalies
+                        </h2>
+
+                        <p>
+                            Recent unusual air quality events
+                            identified from sensor readings.
+                        </p>
+
+                    </div>
+
+
+                    <span
+                        class="live-indicator"
+                    >
+
+                        <i></i>
+
+                        Live Monitoring
+
+                    </span>
+
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+
+                    <table>
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Time
+                                </th>
+
+                                <th>
+                                    Node
+                                </th>
+
+                                <th>
+                                    Severity
+                                </th>
+
+                                <th>
+                                    AI Score
+                                </th>
+
+                                <th>
+                                    Reason
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="anomaly-table-body"
+                        >
+
+                            <tr>
+
+                                <td
+                                    colspan="5"
+                                    class="loading-row"
+                                >
+                                    Loading anomaly data...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 AI INSIGHT
+            ====================================== -->
+
+            <section class="ai-insight">
+
+
+                <div class="ai-icon">
+                    ✦
+                </div>
+
+
+                <div>
+
+                    <span>
+                        AI INSIGHT
+                    </span>
+
+                    <h3>
+                        How anomaly detection works
+                    </h3>
+
+                    <p>
+                        IsolationForest continuously analyzes
+                        sensor patterns and detects unusual
+                        pollution events without requiring
+                        manually labelled data.
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+
+    </div>
+
+
+    <script src="/anomaly-log.js"></script>
+
+</body>
+
+</html>

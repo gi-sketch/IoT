@@ -1,0 +1,52 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# AirIQ local database
+ml/air_quality.db
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# ML / Dataset files
+# =========================
+ml/archive/
+
+
+# =========================
+# Test / Dataset files
+# =========================
+tests/
+
+# Frontend libraries
+frontend/chart.umd.min.js

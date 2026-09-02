@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AirIQ | AQI Predictions</title>
+
+    <link
+        rel="stylesheet"
+        href="/predictions.css"
+    >
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+
+
+<body>
+
+    <div class="app">
+
+
+        <!-- =====================================
+             SIDEBAR
+        ====================================== -->
+
+        <aside class="sidebar">
+
+
+            <!-- Brand -->
+
+            <div class="brand">
+
+                <div class="brand-mark">
+                    ✦
+                </div>
+
+                <span>AirIQ</span>
+
+            </div>
+
+
+            <!-- Navigation -->
+
+            <nav class="nav">
+
+
+                <a
+                    href="/dashboard"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ▦
+                    </span>
+
+                    <span>
+                        Dashboard
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="campus-heatmap.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ☰
+                    </span>
+
+                    <span>
+                        Campus Heatmap
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="anomaly-log.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ⚠
+                    </span>
+
+                    <span>
+                        Anomaly Log
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="predictions.html"
+                    class="nav-item active"
+                >
+
+                    <span class="nav-glyph">
+                        ↗
+                    </span>
+
+                    <span>
+                        AQI Predictions
+                    </span>
+
+                </a>
+
+
+                
+
+
+                <a
+                    href="profile.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ◉
+                    </span>
+
+                    <span>
+                        User / Profile
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="about.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">
+                        ⓘ
+                    </span>
+
+                    <span>
+                        About Project
+                    </span>
+
+                </a>
+
+
+            </nav>
+
+
+            <!-- Sidebar Bottom -->
+
+        <div class="sidebar-footer">
+
+            <a
+                href="settings.html"
+                class="nav-item"
+            >
+                <span class="nav-glyph">⚙</span>
+                Settings
+            </a>
+
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        All Nodes Online
+                    </strong>
+
+                    <small>
+                        AirIQ system active
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        </aside>
+
+
+        <!-- =====================================
+             MAIN CONTENT
+        ====================================== -->
+
+        <main class="main">
+
+
+            <!-- Header -->
+
+            <header class="topbar">
+
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        AIR QUALITY INTELLIGENCE
+                    </span>
+
+                    <h1>
+                        AI-Powered AQI Forecast
+                    </h1>
+
+                    <p>
+                        Short-term air quality prediction using
+                        machine learning.
+                    </p>
+
+                </div>
+
+
+                <div class="header-actions">
+
+
+                    <div
+                        class="last-updated"
+                        id="last-updated"
+                    >
+
+                        Loading...
+
+                    </div>
+
+
+                    <button
+                        id="refresh-btn"
+                        class="refresh-btn"
+                    >
+
+                        ↻ Refresh
+
+                    </button>
+
+
+                    <div
+                        class="user-avatar"
+                        id="user-avatar"
+                    >
+                        U
+                    </div>
+
+
+                </div>
+
+
+            </header>
+
+
+            <!-- =====================================
+                 FORECAST CARDS
+            ====================================== -->
+
+            <section class="forecast-grid">
+
+
+                <!-- Current -->
+
+                <div class="forecast-card current-card">
+
+
+                    <div class="forecast-top">
+
+                        <span class="forecast-icon">
+                            ●
+                        </span>
+
+                        <span class="forecast-label">
+                            Current AQI
+                        </span>
+
+                    </div>
+
+
+                    <strong
+                        id="current-aqi"
+                    >
+                        —
+                    </strong>
+
+
+                    <span
+                        class="forecast-status"
+                        id="current-status"
+                    >
+                        Loading...
+                    </span>
+
+
+                </div>
+
+
+                <!-- +30 Minutes -->
+
+                <div class="forecast-card">
+
+
+                    <div class="forecast-top">
+
+                        <span class="forecast-icon">
+                            ↗
+                        </span>
+
+                        <span class="forecast-label">
+                            +30 Minutes
+                        </span>
+
+                    </div>
+
+
+                    <strong
+                        id="prediction-30"
+                    >
+                        —
+                    </strong>
+
+
+                    <span
+                        class="forecast-status"
+                        id="status-30"
+                    >
+                        Predicted AQI
+                    </span>
+
+
+                </div>
+
+
+                <!-- +1 Hour -->
+
+                <div class="forecast-card">
+
+
+                    <div class="forecast-top">
+
+                        <span class="forecast-icon">
+                            ↗
+                        </span>
+
+                        <span class="forecast-label">
+                            +1 Hour
+                        </span>
+
+                    </div>
+
+
+                    <strong
+                        id="prediction-60"
+                    >
+                        —
+                    </strong>
+
+
+                    <span
+                        class="forecast-status"
+                        id="status-60"
+                    >
+                        Predicted AQI
+                    </span>
+
+
+                </div>
+
+
+                <!-- +2 Hours -->
+
+                <div class="forecast-card prediction-card">
+
+
+                    <div class="forecast-top">
+
+                        <span class="forecast-icon">
+                            ✦
+                        </span>
+
+                        <span class="forecast-label">
+                            +2 Hours
+                        </span>
+
+                    </div>
+
+
+                    <strong
+                        id="prediction-120"
+                    >
+                        —
+                    </strong>
+
+
+                    <span
+                        class="forecast-status"
+                        id="status-120"
+                    >
+                        Predicted AQI
+                    </span>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 PREDICTION CHART
+            ====================================== -->
+
+            <section class="chart-card">
+
+
+                <div class="chart-header">
+
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            FORECAST TIMELINE
+                        </span>
+
+                        <h2>
+                            AQI Trend & Prediction
+                        </h2>
+
+                        <p>
+                            Historical sensor readings and
+                            machine learning forecast.
+                        </p>
+
+                    </div>
+
+
+                    <div class="chart-legend">
+
+
+                        <span>
+
+                            <i class="legend-line historical"></i>
+
+                            Historical AQI
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="legend-line predicted"></i>
+
+                            Predicted AQI
+
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="prediction-start">
+
+                    <span>
+                        Prediction begins
+                    </span>
+
+                </div>
+
+
+                <div class="chart-wrapper">
+
+                    <canvas
+                        id="predictionChart"
+                    ></canvas>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 AI RECOMMENDATION
+            ====================================== -->
+
+            <section
+                class="recommendation-card"
+                id="recommendation-card"
+            >
+
+
+                <div class="recommendation-icon">
+                    ⚠
+                </div>
+
+
+                <div class="recommendation-content">
+
+                    <span>
+                        AI RECOMMENDATION
+                    </span>
+
+                    <h3
+                        id="recommendation-title"
+                    >
+                        Monitoring forecast...
+                    </h3>
+
+                    <p
+                        id="recommendation-text"
+                    >
+                        AirIQ is analyzing recent AQI patterns
+                        and preparing a short-term forecast.
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 MODEL INFORMATION
+            ====================================== -->
+
+            <section class="model-info">
+
+
+                <div class="model-icon">
+                    ✦
+                </div>
+
+
+                <div>
+
+                    <span>
+                        AI FORECAST MODEL
+                    </span>
+
+                    <h3>
+                        Short-Term AQI Prediction
+                    </h3>
+
+                    <p>
+                        Forecast values are generated from recent
+                        air quality trends using the AirIQ machine
+                        learning prediction pipeline.
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+
+    </div>
+
+
+    <!-- Chart.js -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <!-- Page JavaScript -->
+
+    <script src="/predictions.js"></script>
+
+
+</body>
+
+</html>

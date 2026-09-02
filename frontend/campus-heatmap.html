@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Campus Heatmap | AirIQ
+    </title>
+
+
+    <!-- Existing Dashboard CSS FIRST -->
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <!-- Heatmap CSS SECOND -->
+    <link
+        rel="stylesheet"
+        href="campus-heatmap.css"
+    >
+
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+
+    
+
+</head>
+
+
+<body>
+
+
+<!-- SAME CLASS AS YOUR DASHBOARD -->
+<div class="app">
+
+
+    <!-- =====================================
+         SAME SIDEBAR
+    ====================================== -->
+
+    <aside class="sidebar">
+
+    <!-- Logo -->
+    <div class="brand">
+
+        <div class="brand-mark">
+            ✦
+        </div>
+
+        <span>AirIQ</span>
+
+    </div>
+
+
+    <!-- Navigation -->
+    <nav class="nav">
+
+        <a href="/dashboard" class="nav-item">
+
+            <span class="nav-glyph">▦</span>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="/campus-heatmap" class="nav-item active">
+
+            <span class="nav-glyph">☰</span>
+
+            <span>Campus Heatmap</span>
+
+        </a>
+
+
+        <a href="anomaly-log.html" class="nav-item">
+
+            <span class="nav-glyph">⚠</span>
+
+            <span>Anomaly Log</span>
+
+        </a>
+
+
+        <a href="predictions.html" class="nav-item">
+
+            <span class="nav-glyph">↗</span>
+
+            <span>AQI Predictions</span>
+
+        </a>
+
+        <a href="profile.html" class="nav-item">
+
+            <span class="nav-glyph">◉</span>
+
+            <span>User / Profile</span>
+
+        </a>
+
+
+        <a href="about.html" class="nav-item">
+
+            <span class="nav-glyph">ⓘ</span>
+
+            <span>About Project</span>
+
+        </a>
+
+    </nav>
+
+
+    <!-- Bottom Sidebar -->
+    <div class="sidebar-bottom">
+
+        <div class="sidebar-divider"></div>
+
+
+        <a href="/settings" class="nav-item">
+
+            <span class="nav-glyph">⚙</span>
+
+            <span>Settings</span>
+
+        </a>
+
+
+        <div class="system-status">
+
+            <span class="system-status-dot"></span>
+
+            <div>
+
+                <strong>All Nodes Online</strong>
+
+                <small>AirIQ system active</small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+       
+    <!-- =====================================
+         MAIN CONTENT
+    ====================================== -->
+
+    <main class="main heatmap-main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div>
+
+                <h1
+                    id="user-greeting"
+                >
+                    Hi, User!
+                </h1>
+
+                <p class="subtitle">
+
+                    Campus air quality monitoring
+
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <button
+                    id="refresh-btn"
+                    class="btn-primary"
+                >
+
+                    ↻ Refresh
+
+                </button>
+
+
+                <button
+                    class="icon-btn"
+                    type="button"
+                >
+                    ⌕
+                </button>
+
+
+                <button
+                    class="icon-btn"
+                    type="button"
+                >
+                    ◔
+                </button>
+
+
+                <div
+                    id="user-avatar"
+                    class="avatar"
+                >
+                    U
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="heatmap-page-header">
+
+
+            <h2>
+                Campus Air Quality Heatmap
+            </h2>
+
+
+            <p>
+                Real-time pollution distribution from ESP32 sensor nodes
+            </p>
+
+
+        </section>
+
+
+
+        <!-- LIVE STATUS -->
+
+        <div class="heatmap-status">
+
+
+            <span class="status-dot"></span>
+
+
+            <strong>
+                Live IoT Data
+            </strong>
+
+
+            <span
+                id="last-updated"
+                class="heatmap-updated"
+            >
+                Connecting...
+            </span>
+
+
+        </div>
+
+
+
+        <!-- MAP CARD -->
+
+        <section
+            class="card card-light heatmap-card"
+        >
+
+
+            <div class="card-head heatmap-card-head">
+
+
+                <div>
+
+                    <h3>
+                        Campus Pollution Map
+                    </h3>
+
+
+                    <p class="heatmap-description">
+
+                        Pollution intensity based on live AQI readings
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="heatmap-legend">
+
+
+                    <span>
+
+                        <i class="legend-dot clean"></i>
+
+                        Clean
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="legend-dot moderate"></i>
+
+                        Moderate
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="legend-dot unhealthy"></i>
+
+                        Unhealthy
+
+                    </span>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <div
+                id="campus-map"
+            ></div>
+
+
+        </section>
+
+
+
+        <!-- SUMMARY -->
+
+        <section class="heatmap-summary-grid">
+
+
+            <!-- WORST -->
+
+            <div
+                class="card card-dark summary-card"
+            >
+
+
+                <span class="summary-label">
+
+                    Worst Area Today
+
+                </span>
+
+
+                <h2
+                    id="worst-area"
+                >
+                    Loading...
+                </h2>
+
+
+                <p
+                    id="worst-details"
+                >
+                    Waiting for sensor data
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- CLEANEST -->
+
+            <div
+                class="card card-light summary-card"
+            >
+
+
+                <span class="summary-label">
+
+                    Cleanest Area Today
+
+                </span>
+
+
+                <h2
+                    id="cleanest-area"
+                >
+                    Loading...
+                </h2>
+
+
+                <p
+                    id="cleanest-details"
+                >
+                    Waiting for sensor data
+
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- SENSOR NODES -->
+
+        <section
+            class="card card-light heatmap-nodes"
+        >
+
+
+            <div class="card-head">
+
+
+                <div>
+
+                    <h3>
+                        Sensor Nodes
+                    </h3>
+
+
+                    <p class="heatmap-description">
+
+                        Latest live readings from ESP32 locations
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div
+                id="node-grid"
+                class="heatmap-node-grid"
+            >
+
+                <div class="heatmap-loading">
+
+                    Loading sensor nodes...
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- Leaflet -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+
+<!-- Leaflet Heat -->
+
+   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+
+<script src="/campus-heatmap.js"></script>
+
+
+
+
+
+</body>
+
+</html>

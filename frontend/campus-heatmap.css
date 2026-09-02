@@ -1,0 +1,872 @@
+/* =========================================
+   CAMPUS HEATMAP PAGE ONLY
+========================================= */
+
+
+/* Prevent the heatmap page from stretching
+   incorrectly */
+
+.heatmap-main {
+    min-width: 0;
+    width: 100%;
+}
+
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.heatmap-page-header {
+    margin-top: -4px;
+}
+
+
+.heatmap-page-header h2 {
+    margin: 0;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 1.6rem;
+
+    font-weight: 700;
+
+    color: var(--ink);
+}
+
+
+.heatmap-page-header p {
+    margin:
+        6px
+        0
+        0;
+
+    color: var(--slate);
+
+    font-size: 0.88rem;
+}
+
+
+/* =========================================
+   LIVE STATUS
+========================================= */
+
+.heatmap-status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    width: fit-content;
+
+    padding:
+        10px
+        14px;
+
+    background: #ffffff;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 12px;
+
+    box-shadow:
+        var(--shadow-soft);
+
+    font-size: 0.8rem;
+}
+
+
+.heatmap-status .status-dot {
+    width: 8px;
+
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #20c997;
+
+    display: inline-block;
+}
+
+
+.heatmap-updated {
+    color: var(--slate);
+
+    margin-left: 4px;
+}
+
+
+/* =========================================
+   MAP CARD
+========================================= */
+
+.heatmap-card {
+    padding: 20px 22px;
+
+    width: 100%;
+
+    min-width: 0;
+}
+
+
+.heatmap-card-head {
+    margin-bottom: 16px;
+}
+
+
+.heatmap-description {
+    margin:
+        5px
+        0
+        0;
+
+    color: var(--slate);
+
+    font-size: 0.78rem;
+}
+
+
+#campus-map {
+    width: 100%;
+
+    height: 520px;
+
+    min-height: 520px;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        var(--border);
+
+    background: #e5e5e5;
+}
+
+
+/* =========================================
+   MAP LEGEND
+========================================= */
+
+.heatmap-legend {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding:
+        9px
+        12px;
+
+    background:
+        var(--paper);
+
+    border-radius: 12px;
+
+    font-size: 0.72rem;
+
+    color:
+        var(--slate);
+}
+
+
+.heatmap-legend span {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+}
+
+
+.legend-dot {
+    width: 8px;
+
+    height: 8px;
+
+    border-radius: 50%;
+
+    display: inline-block;
+}
+
+
+.legend-dot.clean {
+    background: #20c997;
+}
+
+
+.legend-dot.moderate {
+    background: #f0b429;
+}
+
+
+.legend-dot.unhealthy {
+    background: #e05252;
+}
+
+
+/* =========================================
+   WORST / CLEANEST GRID
+========================================= */
+
+.heatmap-summary-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    width: 100%;
+}
+
+
+.summary-card {
+    min-height: 150px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+.summary-label {
+    color: var(--slate);
+
+    font-size: 0.78rem;
+
+    font-weight: 600;
+}
+
+
+.summary-card h2 {
+    margin:
+        12px
+        0
+        6px;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 1.7rem;
+}
+
+
+.summary-card p {
+    margin: 0;
+
+    color: var(--slate);
+
+    font-size: 0.85rem;
+}
+
+
+/* White summary card */
+
+.card-light.summary-card {
+    background: #ffffff;
+}
+
+
+/* Dark summary card */
+
+.card-dark.summary-card .summary-label,
+.card-dark.summary-card p {
+    color:
+        var(--text-on-dark-muted);
+}
+
+
+/* =========================================
+   SENSOR NODES
+========================================= */
+
+.heatmap-nodes {
+    width: 100%;
+}
+
+
+.heatmap-node-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(240px, 1fr)
+        );
+
+    gap: 16px;
+
+    width: 100%;
+}
+
+
+.heatmap-node-card {
+    background:
+        var(--ink);
+
+    color:
+        var(--text-on-dark);
+
+    padding: 18px;
+
+    border-radius:
+        var(--radius-md);
+
+    min-height: 190px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    box-shadow:
+        var(--shadow-dark);
+}
+
+
+.heatmap-node-name {
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 1rem;
+
+    font-weight: 600;
+}
+
+
+.heatmap-node-location {
+    margin-top: 4px;
+
+    color:
+        var(--text-on-dark-muted);
+
+    font-size: 0.75rem;
+}
+
+
+.heatmap-node-aqi {
+    font-family:
+        "JetBrains Mono",
+        monospace;
+
+    font-size: 2.4rem;
+
+    font-weight: 700;
+
+    margin:
+        18px
+        0;
+}
+
+
+.heatmap-node-metrics {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+
+    padding-top: 12px;
+
+    border-top:
+        1px solid
+        var(--border-dark);
+
+    font-size: 0.72rem;
+
+    color:
+        var(--text-on-dark-muted);
+}
+
+
+.heatmap-loading {
+    padding: 30px;
+
+    text-align: center;
+
+    color:
+        var(--slate);
+}
+
+
+/* =========================================
+   LEAFLET
+========================================= */
+
+.leaflet-container {
+    font-family:
+        Inter,
+        sans-serif;
+}
+
+
+.leaflet-popup-content-wrapper {
+    background:
+        var(--ink);
+
+    color:
+        var(--text-on-dark);
+
+    border-radius:
+        16px;
+
+    box-shadow:
+        var(--shadow-dark);
+}
+
+
+.leaflet-popup-tip {
+    background:
+        var(--ink);
+}
+
+
+.node-popup h3 {
+    margin:
+        0
+        0
+        12px;
+
+    color:
+        white;
+
+    font-size:
+        0.95rem;
+}
+
+
+.node-popup p {
+    margin:
+        6px
+        0;
+
+    color:
+        var(--text-on-dark-muted);
+
+    font-size:
+        0.75rem;
+}
+
+
+.node-popup strong {
+    color:
+        white;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (
+    max-width: 900px
+) {
+
+    .heatmap-summary-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .heatmap-card-head {
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+
+    .heatmap-legend {
+        flex-wrap:
+            wrap;
+    }
+
+}
+
+
+@media (
+    max-width: 700px
+) {
+
+    #campus-map {
+        height:
+            400px;
+
+        min-height:
+            400px;
+    }
+
+
+    .heatmap-page-header h2 {
+        font-size:
+            1.3rem;
+    }
+
+
+    .heatmap-node-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+/* =========================================
+   HEATMAP PAGE SPACING
+========================================= */
+
+.heatmap-main {
+    padding-top: 28px !important;
+}
+
+
+/* Space between top greeting and page title */
+
+.heatmap-page-header {
+    margin-top: 32px !important;
+    margin-bottom: 20px !important;
+}
+
+
+/* Better spacing inside page title section */
+
+.heatmap-page-header h2 {
+    margin-bottom: 10px !important;
+}
+
+
+.heatmap-page-header p {
+    margin-top: 0 !important;
+}
+
+
+/* Space between subtitle and live data status */
+
+.heatmap-status {
+    margin-top: 18px !important;
+    margin-bottom: 28px !important;
+}
+
+
+/* Space before the map card */
+
+.heatmap-card {
+    margin-top: 8px !important;
+}
+
+
+/* Space after map */
+
+.heatmap-summary-grid {
+    margin-top: 28px !important;
+}
+
+
+/* Space between summary cards and sensor nodes */
+
+.heatmap-nodes {
+    margin-top: 28px !important;
+}
+
+
+/* Give the topbar more breathing room */
+
+.topbar {
+    margin-bottom: 12px !important;
+}
+
+/* =========================================
+   AIRIQ SIDEBAR
+========================================= */
+
+.sidebar {
+    width: 215px;
+    min-width: 215px;
+
+    min-height: 100vh;
+
+    padding: 20px 10px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: var(--paper, #f7f7f6);
+
+    border-right: 1px solid #e5e5e5;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 18px;
+
+    margin-bottom: 20px;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #26313d;
+}
+
+
+.brand-mark {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #1c232b;
+
+    color: white;
+
+    font-size: 16px;
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.nav {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    width: 100%;
+}
+
+
+.nav-item {
+    width: 100%;
+    height: 40px;
+
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    border-radius: 11px;
+
+    box-sizing: border-box;
+
+    text-decoration: none;
+
+    color: #53606d;
+
+    font-size: 14px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.nav-item:hover {
+    background: #eeeeee;
+
+    color: #1d252d;
+}
+
+
+.nav-item.active {
+    background: #1d2329;
+
+    color: white;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 8px 18px
+        rgba(0, 0, 0, 0.08);
+}
+
+
+/* Icons */
+
+.nav-glyph {
+    width: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+
+    opacity: 0.9;
+}
+
+
+/* =========================================
+   BOTTOM AREA
+========================================= */
+
+.sidebar-bottom {
+    margin-top: auto;
+
+    width: 100%;
+}
+
+
+.sidebar-divider {
+    width: 100%;
+
+    height: 1px;
+
+    background: #dedede;
+
+    margin:
+        0
+        0
+        18px;
+}
+
+
+/* =========================================
+   SYSTEM STATUS CARD
+========================================= */
+
+.system-status {
+    margin: 14px 12px 0;
+
+    padding: 13px 12px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    border-radius: 13px;
+
+    background: #efefed;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0, 0, 0, 0.04);
+}
+
+
+.system-status-dot {
+    width: 7px;
+    height: 7px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #5cb59b;
+}
+
+
+.system-status strong {
+    display: block;
+
+    color: #37414b;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.system-status small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #7d858d;
+
+    font-size: 9px;
+}
+
+/* ==========================================
+   CURRENT LOCATION CONTROL
+========================================== */
+
+.leaflet-control a {
+    background: #ffffff;
+    color: #20272e;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.leaflet-control a:hover {
+    background: #f1f5f9;
+}
+
+
+/* ==========================================
+   HEATMAP VISUAL
+========================================== */
+
+.leaflet-heatmap-layer {
+    opacity: 0.85;
+}
+
+
+/* ==========================================
+   NODE POPUP
+========================================== */
+
+.node-popup {
+    min-width: 190px;
+    font-family: Arial, sans-serif;
+}
+
+.node-popup h3 {
+    margin: 0 0 12px;
+    font-size: 15px;
+    color: #20272e;
+}
+
+.popup-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 6px 0;
+    border-bottom: 1px solid #edf0f2;
+}
+
+.popup-row span {
+    color: #7d858d;
+}
+
+.popup-row strong {
+    color: #20272e;
+}
+
+.popup-footer {
+    margin-top: 10px;
+    padding-top: 8px;
+    font-weight: 700;
+    color: #20272e;
+}

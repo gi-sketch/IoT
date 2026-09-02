@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>AirIQ — Login</title>
+
+
+  <!-- Fonts -->
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- CSS -->
+
+  <link
+    rel="stylesheet"
+    href="/auth.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<div class="auth-page">
+
+
+  <!-- =========================================
+       LEFT VISUAL PANEL
+  ========================================== -->
+
+  <section class="auth-visual">
+
+
+    <div class="visual-top">
+
+      <div class="brand">
+
+        <div class="brand-mark">
+          ✦
+        </div>
+
+        <span>
+          AirIQ
+        </span>
+
+      </div>
+
+
+      <span class="system-pill">
+
+        <i></i>
+
+        Smart Monitoring
+
+      </span>
+
+    </div>
+
+
+
+    <div class="visual-content">
+
+
+      <div class="eyebrow">
+
+        SMART CAMPUS SYSTEM
+
+      </div>
+
+
+
+      <h1>
+
+        Better air.<br>
+
+        <span>
+
+          Smarter decisions.
+
+        </span>
+
+      </h1>
+
+
+
+      <p>
+
+        Monitor campus air quality in real time with IoT sensors
+        and AI-powered environmental insights.
+
+      </p>
+
+
+
+      <!-- MINI DASHBOARD -->
+
+      <div class="mini-dashboard">
+
+
+        <div class="mini-card mini-card-large">
+
+
+          <span class="mini-label">
+
+            CURRENT AQI
+
+          </span>
+
+
+
+          <div class="aqi-row">
+
+
+            <strong>
+
+              82
+
+            </strong>
+
+
+
+            <div>
+
+
+              <span class="status-good">
+
+                <i></i>
+
+                MODERATE
+
+              </span>
+
+
+
+              <small>
+
+                Campus average
+
+              </small>
+
+
+            </div>
+
+
+          </div>
+
+
+
+          <div class="mini-bars">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+          </div>
+
+
+        </div>
+
+
+
+        <div class="mini-stats">
+
+
+          <div class="mini-stat">
+
+            <span>
+
+              CO₂
+
+            </span>
+
+
+            <strong>
+
+              650
+
+            </strong>
+
+
+            <small>
+
+              ppm
+
+            </small>
+
+          </div>
+
+
+
+          <div class="mini-stat">
+
+            <span>
+
+              NODES
+
+            </span>
+
+
+            <strong>
+
+              03
+
+            </strong>
+
+
+            <small>
+
+              online
+
+            </small>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <div class="visual-footer">
+
+      <span>
+
+        IoT-Based Smart Air Quality Monitoring
+
+      </span>
+
+
+      <span>
+
+        ● Kerala, India
+
+      </span>
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =========================================
+       RIGHT LOGIN PANEL
+  ========================================== -->
+
+  <section class="auth-panel">
+
+
+    <div class="auth-card">
+
+
+      <!-- Mobile Brand -->
+
+      <div class="mobile-brand">
+
+        <div class="brand-mark">
+
+          ✦
+
+        </div>
+
+
+        <span>
+
+          AirIQ
+
+        </span>
+
+      </div>
+
+
+
+      <!-- Heading -->
+
+      <div class="auth-heading">
+
+
+        <span class="auth-eyebrow">
+
+          WELCOME BACK
+
+        </span>
+
+
+        <h2>
+
+          Sign in to AirIQ
+
+        </h2>
+
+
+        <p>
+
+          Access your smart air quality monitoring dashboard.
+
+        </p>
+
+
+      </div>
+
+
+
+      <!-- =========================================
+           LOGIN FORM
+      ========================================== -->
+
+      <form
+        id="login-form"
+        class="auth-form"
+        action="javascript:void(0);"
+      >
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+
+          <label for="email">
+
+            Email Address
+
+          </label>
+
+
+          <div class="input-wrap">
+
+
+            <span class="input-icon">
+
+              ✉
+
+            </span>
+
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+              autocomplete="email"
+            >
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+
+          <div class="label-row">
+
+
+            <label for="password">
+
+              Password
+
+            </label>
+
+
+            <a
+              href="#"
+              class="forgot-link"
+            >
+
+              Forgot password?
+
+            </a>
+
+
+          </div>
+
+
+
+          <div class="input-wrap">
+
+
+            <span class="input-icon">
+
+              ◉
+
+            </span>
+
+
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+              autocomplete="current-password"
+            >
+
+
+
+            <button
+              type="button"
+              class="password-toggle"
+              data-target="password"
+              aria-label="Show password"
+            >
+
+              ◌
+
+            </button>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- REMEMBER ME -->
+
+        <label class="remember-row">
+
+
+          <input
+            type="checkbox"
+            id="remember"
+          >
+
+
+          <span>
+
+            Remember me on this device
+
+          </span>
+
+
+        </label>
+
+
+
+        <!-- SIGN IN BUTTON -->
+
+        <button
+          type="submit"
+          class="auth-button"
+          id="login-button"
+        >
+
+
+          <span>
+
+            Sign In
+
+          </span>
+
+
+          <span class="button-arrow">
+
+            →
+
+          </span>
+
+
+        </button>
+
+
+      </form>
+
+
+
+      <!-- DIVIDER -->
+
+      <div class="auth-divider">
+
+        <span>
+
+          OR
+
+        </span>
+
+      </div>
+
+
+
+      <!-- CAMPUS ACCOUNT -->
+
+      <button
+        type="button"
+        class="secondary-auth-button"
+      >
+
+        Continue with Campus Account
+
+      </button>
+
+
+
+      <!-- SIGNUP -->
+
+      <p class="auth-switch">
+
+        New to AirIQ?
+
+
+        <a href="/signup">
+
+          Create an account
+
+        </a>
+
+
+      </p>
+
+
+
+      <!-- MESSAGE -->
+
+      <p
+        id="auth-message"
+        class="auth-message"
+      ></p>
+
+
+    </div>
+
+
+  </section>
+
+
+</div>
+
+
+
+<!-- =========================================
+     LOAD JAVASCRIPT LAST
+     IMPORTANT: This must be after the form
+========================================== -->
+
+<script src="/auth.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AirIQ | User Profile</title>
+
+    <link
+        rel="stylesheet"
+        href="/profile.css"
+    >
+
+</head>
+
+
+<body>
+
+    <div class="app">
+
+
+        <!-- =====================================
+             SIDEBAR
+        ====================================== -->
+
+        <aside class="sidebar">
+
+
+            <div class="brand">
+
+                <div class="brand-mark">
+                    ✦
+                </div>
+
+                <span>AirIQ</span>
+
+            </div>
+
+
+            <nav class="nav">
+
+
+                <a
+                    href="/dashboard"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">▦</span>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+
+                <a
+                    href="campus-heatmap.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">☰</span>
+
+                    <span>Campus Heatmap</span>
+
+                </a>
+
+
+                <a
+                    href="anomaly-log.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">⚠</span>
+
+                    <span>Anomaly Log</span>
+
+                </a>
+
+
+                <a
+                    href="predictions.html"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">↗</span>
+
+                    <span>AQI Predictions</span>
+
+                </a>
+                                
+
+
+                <a
+                    href="/profile"
+                    class="nav-item active"
+                >
+
+                    <span class="nav-glyph">◉</span>
+
+                    <span>User / Profile</span>
+
+                </a>
+
+
+                <a
+                    href="/about"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">ⓘ</span>
+
+                    <span>About Project</span>
+
+                </a>
+
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+
+                <div class="sidebar-divider"></div>
+
+
+                <a
+                    href="/settings"
+                    class="nav-item"
+                >
+
+                    <span class="nav-glyph">⚙</span>
+
+                    <span>Settings</span>
+
+                </a>
+
+
+                <div class="system-status">
+
+                    <span class="system-status-dot"></span>
+
+                    <div>
+
+                        <strong>All Nodes Online</strong>
+
+                        <small>AirIQ system active</small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </aside>
+
+
+        <!-- =====================================
+             MAIN CONTENT
+        ====================================== -->
+
+        <main class="main">
+
+
+            <!-- HEADER -->
+
+            <header class="topbar">
+
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        ACCOUNT
+                    </span>
+
+                    <h1>
+                        User Profile
+                    </h1>
+
+                    <p>
+                        Manage your AirIQ account and access.
+                    </p>
+
+                </div>
+
+
+                <div class="header-actions">
+
+                    <div
+                        class="user-avatar small-avatar"
+                        id="header-avatar"
+                    >
+                        U
+                    </div>
+
+                </div>
+
+
+            </header>
+
+
+            <!-- =====================================
+                 PROFILE HEADER
+            ====================================== -->
+
+            <section class="profile-hero">
+
+
+                <div class="profile-avatar" id="profile-avatar">
+                    U
+                </div>
+
+
+                <div class="profile-main">
+
+                    <div class="profile-name-row">
+
+                        <h2 id="profile-name">
+                            User
+                        </h2>
+
+
+                        <span
+                            class="role-badge"
+                            id="profile-role"
+                        >
+                            Student
+                        </span>
+
+                    </div>
+
+
+                    <p
+                        class="profile-email"
+                        id="profile-email"
+                    >
+                        —
+                    </p>
+
+
+                    <div class="profile-meta">
+
+                        <span
+                            class="status-badge"
+                            id="account-status"
+                        >
+                            <i></i>
+                            Active
+                        </span>
+
+                        <span id="profile-institution">
+                            AirIQ Member
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    id="edit-profile-btn"
+                >
+                    Edit Profile
+                </button>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 INFORMATION GRID
+            ====================================== -->
+
+            <section class="profile-grid">
+
+
+                <!-- PERSONAL INFORMATION -->
+
+                <article class="profile-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="section-eyebrow">
+                                PERSONAL DETAILS
+                            </span>
+
+                            <h2>
+                                Personal Information
+                            </h2>
+
+                        </div>
+
+                        <span class="card-icon">
+                            ◉
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-list">
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Full Name
+                            </span>
+
+                            <strong
+                                id="info-name"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Email
+                            </span>
+
+                            <strong
+                                id="info-email"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Institution
+                            </span>
+
+                            <strong
+                                id="info-institution"
+                            >
+                                Not provided
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Department
+                            </span>
+
+                            <strong
+                                id="info-department"
+                            >
+                                Not provided
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Role
+                            </span>
+
+                            <strong
+                                id="info-role"
+                            >
+                                Student
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- AIRIQ ACCOUNT -->
+
+                <article class="profile-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="section-eyebrow">
+                                ACCOUNT DETAILS
+                            </span>
+
+                            <h2>
+                                AirIQ Account
+                            </h2>
+
+                        </div>
+
+                        <span class="card-icon">
+                            ✦
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-list">
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Member Since
+                            </span>
+
+                            <strong
+                                id="member-since"
+                            >
+                                Not available
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Last Login
+                            </span>
+
+                            <strong
+                                id="last-login"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Account Status
+                            </span>
+
+                            <strong
+                                class="active-text"
+                                id="account-status-text"
+                            >
+                                Active
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 ROLE & ACCESS
+            ====================================== -->
+
+            <section class="access-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            PERMISSIONS
+                        </span>
+
+                        <h2>
+                            Role & Access
+                        </h2>
+
+                        <p>
+                            Features available for your AirIQ role.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="access-grid"
+                    id="access-grid"
+                >
+                </div>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 SECURITY
+            ====================================== -->
+
+            <section class="security-card">
+
+
+                <div class="security-content">
+
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            ACCOUNT SECURITY
+                        </span>
+
+                        <h2>
+                            Security
+                        </h2>
+
+                        <p>
+                            Manage your password and account session.
+                        </p>
+
+                    </div>
+
+
+                    <div class="security-actions">
+
+
+                        <button
+                            class="secondary-btn"
+                            id="change-password-btn"
+                        >
+                            Change Password
+                        </button>
+
+
+                        <button
+                            class="logout-btn"
+                            id="logout-btn"
+                        >
+                            Logout
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+
+    </div>
+
+
+    <!-- =====================================
+         EDIT PROFILE MODAL
+    ====================================== -->
+
+    <div
+        class="modal"
+        id="edit-modal"
+    >
+
+        <div class="modal-card">
+
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        ACCOUNT DETAILS
+                    </span>
+
+                    <h2>
+                        Edit Profile
+                    </h2>
+
+                </div>
+
+
+                <button
+                    class="close-btn"
+                    id="close-modal-btn"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="edit-profile-form">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="edit-name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="edit-email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Institution
+                    </label>
+
+                    <input
+                        type="text"
+                        id="edit-institution"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Department
+                    </label>
+
+                    <input
+                        type="text"
+                        id="edit-department"
+                    >
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        id="cancel-edit-btn"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Save Changes
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         PASSWORD MODAL
+    ====================================== -->
+
+    <div
+        class="modal"
+        id="password-modal"
+    >
+
+        <div class="modal-card small-modal">
+
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        SECURITY
+                    </span>
+
+                    <h2>
+                        Change Password
+                    </h2>
+
+                </div>
+
+
+                <button
+                    class="close-btn"
+                    id="close-password-btn"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="password-form">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Current Password
+                    </label>
+
+                    <input
+                        type="password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Confirm New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        id="cancel-password-btn"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Update Password
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+    <script src="/profile.js"></script>
+
+</body>
+
+</html>
