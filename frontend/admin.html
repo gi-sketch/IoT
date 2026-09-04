@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AirIQ | Admin Panel</title>
+
+    <link rel="stylesheet" href="/admin.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">✦</div>
+            <span>AirIQ</span>
+        </div>
+
+        <nav class="nav">
+
+            <a href="/dashboard" class="nav-item">
+                <span class="nav-glyph">▦</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/campus-heatmap" class="nav-item">
+                <span class="nav-glyph">☰</span>
+                <span>Campus Heatmap</span>
+            </a>
+
+            <a href="/anomaly-log" class="nav-item">
+                <span class="nav-glyph">⚠</span>
+                <span>Anomaly Log</span>
+            </a>
+
+            <a href="/predictions" class="nav-item">
+                <span class="nav-glyph">↗</span>
+                <span>AQI Predictions</span>
+            </a>
+
+            <a href="/leaderboard" class="nav-item">
+                <span class="nav-glyph">★</span>
+                <span>Leaderboard</span>
+            </a>
+
+            <a href="/profile" class="nav-item">
+                <span class="nav-glyph">◉</span>
+                <span>User / Profile</span>
+            </a>
+
+            <a href="/about" class="nav-item">
+                <span class="nav-glyph">ⓘ</span>
+                <span>About Project</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-divider"></div>
+
+            <a href="/settings" class="nav-item">
+                <span class="nav-glyph">⚙</span>
+                <span>Settings</span>
+            </a>
+
+            <a href="/admin" class="nav-item active">
+                <span class="nav-glyph">♟</span>
+                <span>Admin Panel</span>
+            </a>
+
+            <div class="system-status">
+
+                <span class="system-status-dot"></span>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>
+                        <span id="admin-level">Administrator</span>
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+
+                <span class="page-eyebrow">
+                    SYSTEM ADMINISTRATION
+                </span>
+
+                <h1>Admin Panel</h1>
+
+                <p>
+                    Manage AirIQ users, IoT sensor nodes,
+                    and system configuration.
+                </p>
+
+            </div>
+
+            <div class="header-actions">
+
+                <div class="admin-identity">
+
+                    <strong id="admin-name">
+                        Administrator
+                    </strong>
+
+                    <span id="admin-role-badge">
+                        Admin
+                    </span>
+
+                </div>
+
+                <span
+                    class="last-updated"
+                    id="last-updated"
+                >
+                    Loading...
+                </span>
+
+                <button
+                    class="refresh-btn"
+                    id="refresh-btn"
+                    type="button"
+                >
+                    ↻ Refresh
+                </button>
+
+                <div
+                    class="user-avatar"
+                    id="user-avatar"
+                >
+                    A
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- STATISTICS -->
+
+        <section class="stats-grid">
+
+            <article class="stat-card">
+
+                <div class="stat-icon">♟</div>
+
+                <div>
+                    <span>Total Users</span>
+                    <strong id="total-users">—</strong>
+                    <small id="active-users">
+                        — active
+                    </small>
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon">◉</div>
+
+                <div>
+                    <span>IoT Nodes</span>
+                    <strong id="total-nodes">—</strong>
+                    <small id="online-nodes">
+                        — online
+                    </small>
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon">✓</div>
+
+                <div>
+                    <span>Active Accounts</span>
+                    <strong id="active-accounts">—</strong>
+                    <small>
+                        currently enabled
+                    </small>
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon">!</div>
+
+                <div>
+                    <span>Offline Nodes</span>
+                    <strong id="offline-nodes">—</strong>
+                    <small>
+                        need attention
+                    </small>
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-icon">★</div>
+
+                <div>
+                    <span>Administrators</span>
+                    <strong id="total-admins">—</strong>
+                    <small>
+                        registered admins
+                    </small>
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- USER MANAGEMENT -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        ACCOUNT MANAGEMENT
+                    </span>
+
+                    <h2>User Management</h2>
+
+                    <p>
+                        Create, edit, activate and deactivate
+                        AirIQ accounts.
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    id="add-user-btn"
+                    type="button"
+                >
+                    ＋ Add User
+                </button>
+
+            </div>
+
+
+            <div class="toolbar">
+
+                <input
+                    id="user-search"
+                    type="search"
+                    placeholder="Search name, email or institution..."
+                >
+
+                <select id="role-filter">
+                    <option value="">All roles</option>
+                    <option value="student">Student</option>
+                    <option value="faculty">Faculty</option>
+                    <option value="researcher">Researcher</option>
+                </select>
+
+                <select id="status-filter">
+                    <option value="">All statuses</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+
+                <select id="admin-filter">
+                    <option value="">All account types</option>
+                    <option value="admin">Administrators</option>
+                    <option value="user">Normal Users</option>
+                </select>
+
+            </div>
+
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>User</th>
+                            <th>Role / Admin</th>
+                            <th>Institution</th>
+                            <th>Status</th>
+                            <th>Last Login</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="users-body">
+
+                        <tr>
+                            <td
+                                colspan="6"
+                                class="empty"
+                            >
+                                Loading users...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- DEVICE MANAGEMENT -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        DEVICE MANAGEMENT
+                    </span>
+
+                    <h2>IoT Sensor Nodes</h2>
+
+                    <p>
+                        Manage ESP32 monitoring nodes
+                        and their campus locations.
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    id="add-node-btn"
+                    type="button"
+                >
+                    ＋ Add Node
+                </button>
+
+            </div>
+
+
+            <div class="toolbar">
+
+                <input
+                    id="node-search"
+                    type="search"
+                    placeholder="Search node or location..."
+                >
+
+                <select id="node-status-filter">
+                    <option value="">All statuses</option>
+                    <option value="online">Online</option>
+                    <option value="offline">Offline</option>
+                </select>
+
+            </div>
+
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Node</th>
+                            <th>Location</th>
+                            <th>Sensors</th>
+                            <th>Status</th>
+                            <th>Last Seen</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="nodes-body">
+
+                        <tr>
+                            <td
+                                colspan="6"
+                                class="empty"
+                            >
+                                Loading nodes...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONFIGURATION + ACTIVITY -->
+
+        <section class="two-column">
+
+            <section class="panel">
+
+                <div class="panel-header compact">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            SYSTEM CONFIGURATION
+                        </span>
+
+                        <h2>Thresholds</h2>
+
+                        <p>
+                            Values used by monitoring
+                            and alert logic.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="config-grid">
+
+                    <label>
+                        AQI Alert Threshold
+                        <input
+                            type="number"
+                            id="cfg-aqi_alert_threshold"
+                            min="0"
+                        >
+                    </label>
+
+                    <label>
+                        CO₂ Warning Threshold
+                        <input
+                            type="number"
+                            id="cfg-co2_warning_threshold"
+                            min="0"
+                        >
+                    </label>
+
+                    <label>
+                        VOC Warning Threshold
+                        <input
+                            type="number"
+                            id="cfg-voc_warning_threshold"
+                            min="0"
+                            step="0.01"
+                        >
+                    </label>
+
+                    <label>
+                        Temperature Threshold
+                        <input
+                            type="number"
+                            id="cfg-temperature_threshold"
+                            min="0"
+                            step="0.1"
+                        >
+                    </label>
+
+                    <label>
+                        Humidity Threshold
+                        <input
+                            type="number"
+                            id="cfg-humidity_threshold"
+                            min="0"
+                            step="0.1"
+                        >
+                    </label>
+
+                    <label>
+                        Auto Refresh (seconds)
+                        <input
+                            type="number"
+                            id="cfg-refresh_interval"
+                            min="5"
+                        >
+                    </label>
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    id="save-config-btn"
+                    type="button"
+                >
+                    Save Configuration
+                </button>
+
+            </section>
+
+
+            <section class="panel">
+
+                <div class="panel-header compact">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            SYSTEM ACTIVITY
+                        </span>
+
+                        <h2>Recent Admin Activity</h2>
+
+                        <p>
+                            Latest management actions
+                            recorded by AirIQ.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="activity-list"
+                    id="activity-list"
+                >
+
+                    <div class="empty">
+                        Loading activity...
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div
+    class="modal hidden"
+    id="modal"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span
+                    class="section-eyebrow"
+                    id="modal-eyebrow"
+                >
+                    ADMIN
+                </span>
+
+                <h2 id="modal-title">
+                    Edit
+                </h2>
+
+            </div>
+
+            <button
+                class="icon-btn"
+                id="modal-close"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="modal-form"></form>
+
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                class="secondary-btn"
+                id="modal-cancel"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="submit"
+                class="primary-btn"
+                id="modal-submit"
+                form="modal-form"
+            >
+                Save
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script src="/admin.js"></script>
+
+</body>
+</html>

@@ -1,45 +1,54 @@
 from flask import Blueprint, request, jsonify
 from werkzeug.security import check_password_hash
+
 from .database import get_mysql_connection
-from api.database import get_mysql_connection
 
 
-login_api = Blueprint("login_api", __name__)
+login_api = Blueprint(
+    "login_api",
+    __name__,
+    url_prefix="/api"
+)
 
 
-@login_api.route("/api/login", methods=["POST"])
+# =========================================================
+# LOGIN
+# =========================================================
+
+@login_api.route("/login", methods=["POST"])
 def login():
-
-    # Accept JSON from fetch()
-    data = request.get_json(silent=True)
-
-    # Also accept normal HTML form submission
-    if not data:
-        data = request.form.to_dict()
-
-    if not data:
-        return jsonify({
-            "success": False,
-            "message": "No login data received"
-        }), 400
-
-    email = data.get("email", "").strip().lower()
-    password = data.get("password", "")
-
-
-    if not email or not password:
-
-        return jsonify({
-            "success": False,
-            "message": "Email and password are required"
-        }), 400
-
 
     connection = None
     cursor = None
 
-
     try:
+
+        data = request.get_json(silent=True)
+
+        if not data:
+            return jsonify({
+                "success": False,
+                "message": "Invalid request."
+            }), 400
+
+
+        email = str(
+            data.get("email", "")
+        ).strip().lower()
+
+
+        password = str(
+            data.get("password", "")
+        )
+
+
+        if not email or not password:
+
+            return jsonify({
+                "success": False,
+                "message": "Email and password are required."
+            }), 400
+
 
         connection = get_mysql_connection()
 
@@ -47,6 +56,137 @@ def login():
             dictionary=True
         )
 
+
+        # =================================================
+        # CHECK ADMIN FIRST
+        # =================================================
+
+        cursor.execute(
+            """
+            SELECT
+                admin_id,
+                full_name,
+                email,
+                password_hash,
+                is_active
+            FROM admins
+            WHERE LOWER(email) = %s
+            LIMIT 1
+            """,
+            (email,)
+        )
+
+
+        admin = cursor.fetchone()
+
+
+        if admin:
+
+            # ---------------------------------------------
+            # ADMIN ACCOUNT EXISTS
+            # ---------------------------------------------
+
+            if not admin["is_active"]:
+
+                return jsonify({
+                    "success": False,
+                    "message": "Administrator account is inactive."
+                }), 403
+
+
+            if not check_password_hash(
+                admin["password_hash"],
+                password
+            ):
+
+                return jsonify({
+                    "success": False,
+                    "message": "Invalid email or password."
+                }), 401
+
+
+            # ---------------------------------------------
+            # UPDATE ADMIN LAST LOGIN
+            # ---------------------------------------------
+
+            cursor.execute(
+                """
+                UPDATE admins
+                SET last_login = CURRENT_TIMESTAMP
+                WHERE admin_id = %s
+                """,
+                (admin["admin_id"],)
+            )
+
+
+            # ---------------------------------------------
+            # LOG ADMIN LOGIN
+            # ---------------------------------------------
+
+            cursor.execute(
+                """
+                INSERT INTO admin_activity
+                (
+                    admin_id,
+                    action,
+                    target_type,
+                    target_id,
+                    details
+                )
+                VALUES
+                (
+                    %s,
+                    %s,
+                    %s,
+                    %s,
+                    %s
+                )
+                """,
+                (
+                    admin["admin_id"],
+                    "Administrator login",
+                    "admin",
+                    admin["admin_id"],
+                    "Administrator logged into AirIQ."
+                )
+            )
+
+
+            connection.commit()
+
+
+            return jsonify({
+
+                "success": True,
+
+                "message":
+                    "Administrator login successful.",
+
+                "user": {
+
+                    "id":
+                        admin["admin_id"],
+
+                    "name":
+                        admin["full_name"],
+
+                    "email":
+                        admin["email"],
+
+                    "role":
+                        "admin",
+
+                    "is_admin":
+                        True
+
+                }
+
+            }), 200
+
+
+        # =================================================
+        # NORMAL USER LOGIN
+        # =================================================
 
         cursor.execute(
             """
@@ -60,7 +200,8 @@ def login():
                 department,
                 is_active
             FROM users
-            WHERE email = %s
+            WHERE LOWER(email) = %s
+            LIMIT 1
             """,
             (email,)
         )
@@ -73,15 +214,15 @@ def login():
 
             return jsonify({
                 "success": False,
-                "message": "Account not found"
-            }), 404
+                "message": "Invalid email or password."
+            }), 401
 
 
         if not user["is_active"]:
 
             return jsonify({
                 "success": False,
-                "message": "Account has been disabled"
+                "message": "This account has been deactivated."
             }), 403
 
 
@@ -92,19 +233,18 @@ def login():
 
             return jsonify({
                 "success": False,
-                "message": "Incorrect password"
+                "message": "Invalid email or password."
             }), 401
 
 
-        # Update last login
+        # =================================================
+        # UPDATE LAST LOGIN
+        # =================================================
 
-        update_cursor = connection.cursor()
-
-
-        update_cursor.execute(
+        cursor.execute(
             """
             UPDATE users
-            SET last_login = NOW()
+            SET last_login = CURRENT_TIMESTAMP
             WHERE user_id = %s
             """,
             (user["user_id"],)
@@ -113,32 +253,57 @@ def login():
 
         connection.commit()
 
-        update_cursor.close()
-
 
         return jsonify({
+
             "success": True,
-            "message": "Login successful",
+
+            "message":
+                "Login successful.",
 
             "user": {
-                "id": user["user_id"],
-                "name": user["full_name"],
-                "email": user["email"],
-                "role": user["role"],
-                "institution": user["institution"],
-                "department": user["department"]
+
+                "id":
+                    user["user_id"],
+
+                "name":
+                    user["full_name"],
+
+                "email":
+                    user["email"],
+
+                "role":
+                    user["role"],
+
+                "institution":
+                    user["institution"],
+
+                "department":
+                    user["department"],
+
+                "is_admin":
+                    False
+
             }
-        })
+
+        }), 200
 
 
     except Exception as error:
 
-        print("LOGIN ERROR:", error)
+        if connection:
+            connection.rollback()
+
+
+        print(
+            "Login error:",
+            error
+        )
 
 
         return jsonify({
             "success": False,
-            "message": str(error)
+            "message": "An internal server error occurred."
         }), 500
 
 
@@ -146,7 +311,6 @@ def login():
 
         if cursor:
             cursor.close()
-
 
         if connection:
             connection.close()

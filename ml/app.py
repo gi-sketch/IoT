@@ -27,7 +27,7 @@ from api.signup import signup_api
 from api.login import login_api
 from api.sensors import sensor_api
 from api.anomalies import anomaly_api
-
+from api.admin import admin_api
 
 # ==========================================
 # PROJECT PATHS
@@ -72,7 +72,7 @@ app.register_blueprint(signup_api)
 app.register_blueprint(login_api)
 app.register_blueprint(sensor_api)
 app.register_blueprint(anomaly_api)
-
+app.register_blueprint(admin_api)
 
 # ==========================================
 # FRONTEND ROUTES
@@ -144,6 +144,10 @@ def settings():
         FRONTEND_DIR,
         "settings.html"
     )
+
+@app.route("/admin")
+def admin_page():
+    return send_from_directory(FRONTEND_DIR, "admin.html")
 
 
 # ==========================================

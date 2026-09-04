@@ -1,13 +1,11 @@
 // ==========================================
-// AIRIQ AUTHENTICATION JAVASCRIPT
+// AIRIQ AUTHENTICATION
 // ==========================================
 
-
 // ==========================================
-// API BASE
+// API BASE URL
 // ==========================================
 
-// Works whether you use localhost or 127.0.0.1
 const API_BASE = window.location.origin;
 
 
@@ -15,426 +13,34 @@ const API_BASE = window.location.origin;
 // PASSWORD SHOW / HIDE
 // ==========================================
 
-document.querySelectorAll(".password-toggle").forEach(button => {
+document.querySelectorAll(".password-toggle").forEach((toggle) => {
 
-    button.addEventListener("click", () => {
+    toggle.addEventListener("click", () => {
 
-        const targetId = button.dataset.target;
-
-        const input = document.getElementById(targetId);
+        const input =
+            toggle.parentElement.querySelector("input");
 
         if (!input) {
             return;
         }
 
-
         if (input.type === "password") {
 
             input.type = "text";
 
-            button.textContent = "◉";
+            toggle.textContent = "🙈";
 
         } else {
 
             input.type = "password";
 
-            button.textContent = "◌";
+            toggle.textContent = "👁";
 
         }
 
     });
 
 });
-
-
-// ==========================================
-// PASSWORD STRENGTH
-// ==========================================
-
-const signupPassword =
-    document.getElementById("signup-password");
-
-const strengthText =
-    document.getElementById("strength-text");
-
-const strengthBars =
-    document.querySelectorAll(".strength-bar span");
-
-
-if (
-    signupPassword &&
-    strengthText &&
-    strengthBars.length > 0
-) {
-
-    signupPassword.addEventListener(
-        "input",
-        () => {
-
-            const password =
-                signupPassword.value;
-
-
-            let strength = 0;
-
-
-            // ----------------------------------
-            // Check password strength
-            // ----------------------------------
-
-
-            // 8 or more characters
-            if (password.length >= 8) {
-                strength++;
-            }
-
-
-            // Uppercase and lowercase
-            if (
-                /[a-z]/.test(password) &&
-                /[A-Z]/.test(password)
-            ) {
-                strength++;
-            }
-
-
-            // Number
-            if (/[0-9]/.test(password)) {
-                strength++;
-            }
-
-
-            // Special character
-            if (/[^A-Za-z0-9]/.test(password)) {
-                strength++;
-            }
-
-
-            // ----------------------------------
-            // Reset all bars
-            // ----------------------------------
-
-            strengthBars.forEach(bar => {
-
-                bar.classList.remove(
-                    "strength-1",
-                    "strength-2",
-                    "strength-3",
-                    "strength-4"
-                );
-
-            });
-
-
-            // ----------------------------------
-            // Fill bars
-            // ----------------------------------
-
-            for (
-                let i = 0;
-                i < strength && i < strengthBars.length;
-                i++
-            ) {
-
-                strengthBars[i].classList.add(
-                    `strength-${strength}`
-                );
-
-            }
-
-
-            // ----------------------------------
-            // Strength message
-            // ----------------------------------
-
-            if (password.length === 0) {
-
-                strengthText.textContent =
-                    "Use 8+ characters for a stronger password";
-
-            }
-
-            else if (strength === 1) {
-
-                strengthText.textContent =
-                    "Weak password";
-
-            }
-
-            else if (strength === 2) {
-
-                strengthText.textContent =
-                    "Fair password";
-
-            }
-
-            else if (strength === 3) {
-
-                strengthText.textContent =
-                    "Strong password";
-
-            }
-
-            else if (strength === 4) {
-
-                strengthText.textContent =
-                    "Very strong password";
-
-            }
-
-        }
-    );
-
-}
-
-
-// ==========================================
-// SIGNUP
-// ==========================================
-
-const signupForm =
-    document.getElementById("signup-form");
-
-
-if (signupForm) {
-
-    signupForm.addEventListener(
-        "submit",
-
-        async (event) => {
-
-
-            // Prevent normal form submission
-            // This stops data from appearing in URL
-
-            event.preventDefault();
-
-
-            const message =
-                document.getElementById(
-                    "auth-message"
-                );
-
-
-            // ----------------------------------
-            // Get form values
-            // ----------------------------------
-
-            const fullName =
-                document
-                    .getElementById("fullname")
-                    .value
-                    .trim();
-
-
-            const role =
-                document
-                    .getElementById("role")
-                    .value;
-
-
-            const email =
-                document
-                    .getElementById("signup-email")
-                    .value
-                    .trim();
-
-
-            const password =
-                document
-                    .getElementById("signup-password")
-                    .value;
-
-
-            const confirmPassword =
-                document
-                    .getElementById("confirm-password")
-                    .value;
-
-
-            // ----------------------------------
-            // Validation
-            // ----------------------------------
-
-            if (
-                !fullName ||
-                !role ||
-                !email ||
-                !password ||
-                !confirmPassword
-            ) {
-
-                if (message) {
-
-                    message.textContent =
-                        "Please fill in all fields";
-
-                }
-
-                return;
-
-            }
-
-
-            if (password !== confirmPassword) {
-
-                if (message) {
-
-                    message.textContent =
-                        "Passwords do not match";
-
-                }
-
-                return;
-
-            }
-
-
-            if (password.length < 8) {
-
-                if (message) {
-
-                    message.textContent =
-                        "Password must contain at least 8 characters";
-
-                }
-
-                return;
-
-            }
-
-
-            // ----------------------------------
-            // Loading message
-            // ----------------------------------
-
-            if (message) {
-
-                message.textContent =
-                    "Creating your account...";
-
-            }
-
-
-            // ----------------------------------
-            // Send signup request
-            // ----------------------------------
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_BASE}/api/signup`,
-                        {
-
-                            method: "POST",
-
-                            headers: {
-
-                                "Content-Type":
-                                    "application/json"
-
-                            },
-
-                            body: JSON.stringify({
-
-                                full_name: fullName,
-
-                                email: email,
-
-                                password: password,
-
-                                role: role
-
-                            })
-
-                        }
-                    );
-
-
-                const result =
-                    await response.json();
-
-
-                console.log(
-                    "Signup response:",
-                    result
-                );
-
-
-                // ----------------------------------
-                // Signup successful
-                // ----------------------------------
-
-                if (result.success === true) {
-
-                    if (message) {
-
-                        message.textContent =
-                            "Account created successfully! Redirecting to login...";
-
-                    }
-
-
-                    setTimeout(
-                        () => {
-
-                            window.location.href =
-                                "/login";
-
-                        },
-
-                        800
-                    );
-
-                }
-
-
-                // ----------------------------------
-                // Signup failed
-                // ----------------------------------
-
-                else {
-
-                    if (message) {
-
-                        message.textContent =
-                            result.message ||
-                            "Could not create account";
-
-                    }
-
-                }
-
-            }
-
-
-            // ----------------------------------
-            // Connection error
-            // ----------------------------------
-
-            catch (error) {
-
-                console.error(
-                    "Signup error:",
-                    error
-                );
-
-
-                if (message) {
-
-                    message.textContent =
-                        "Could not connect to the server";
-
-                }
-
-            }
-
-
-        }
-    );
-
-}
 
 
 // ==========================================
@@ -452,17 +58,15 @@ if (loginForm) {
 
         async (event) => {
 
-
-            // IMPORTANT:
-            // Stop normal browser form submission
-
             event.preventDefault();
 
 
-            console.log(
-                "Login form submitted"
-            );
+            console.log("Login form submitted");
 
+
+            // ==================================
+            // MESSAGE ELEMENT
+            // ==================================
 
             const message =
                 document.getElementById(
@@ -470,26 +74,42 @@ if (loginForm) {
                 );
 
 
-            // ----------------------------------
-            // Get login values
-            // ----------------------------------
+            // ==================================
+            // GET LOGIN VALUES
+            // ==================================
+
+            const emailInput =
+                document.getElementById("email");
+
+
+            const passwordInput =
+                document.getElementById("password");
+
+
+            if (!emailInput || !passwordInput) {
+
+                console.error(
+                    "Email or password input not found."
+                );
+
+                return;
+
+            }
+
 
             const email =
-                document
-                    .getElementById("email")
-                    .value
-                    .trim();
+                emailInput.value
+                    .trim()
+                    .toLowerCase();
 
 
             const password =
-                document
-                    .getElementById("password")
-                    .value;
+                passwordInput.value;
 
 
-            // ----------------------------------
-            // Validation
-            // ----------------------------------
+            // ==================================
+            // VALIDATION
+            // ==================================
 
             if (!email || !password) {
 
@@ -505,9 +125,9 @@ if (loginForm) {
             }
 
 
-            // ----------------------------------
-            // Loading message
-            // ----------------------------------
+            // ==================================
+            // LOADING MESSAGE
+            // ==================================
 
             if (message) {
 
@@ -517,11 +137,34 @@ if (loginForm) {
             }
 
 
-            // ----------------------------------
-            // Send login request
-            // ----------------------------------
+            // ==================================
+            // DISABLE LOGIN BUTTON
+            // ==================================
+
+            const loginButton =
+                loginForm.querySelector(
+                    'button[type="submit"]'
+                );
+
+
+            if (loginButton) {
+
+                loginButton.disabled = true;
+
+            }
+
+
+            // ==================================
+            // SEND LOGIN REQUEST
+            // ==================================
 
             try {
+
+                console.log(
+                    "Sending login request to:",
+                    `${API_BASE}/api/login`
+                );
+
 
                 const response =
                     await fetch(
@@ -549,10 +192,29 @@ if (loginForm) {
                     );
 
 
-                // Check if response is valid JSON
+                // ==================================
+                // READ SERVER RESPONSE
+                // ==================================
 
-                const result =
-                    await response.json();
+                let result;
+
+                try {
+
+                    result =
+                        await response.json();
+
+                } catch (jsonError) {
+
+                    console.error(
+                        "Invalid JSON response:",
+                        jsonError
+                    );
+
+                    throw new Error(
+                        `Server returned an invalid response. Status: ${response.status}`
+                    );
+
+                }
 
 
                 console.log(
@@ -561,14 +223,40 @@ if (loginForm) {
                 );
 
 
-                // ----------------------------------
-                // Login successful
-                // ----------------------------------
+                // ==================================
+                // LOGIN SUCCESSFUL
+                // ==================================
 
-                if (result.success === true) {
+                if (
+                    response.ok &&
+                    result.success === true
+                ) {
+
+                    // ==================================
+                    // CHECK USER DATA
+                    // ==================================
+
+                    if (!result.user) {
+
+                        console.error(
+                            "Login succeeded but no user data was returned."
+                        );
+
+                        if (message) {
+
+                            message.textContent =
+                                "Login succeeded, but user information was not returned.";
+
+                        }
+
+                        return;
+
+                    }
 
 
-                    // Save user in browser
+                    // ==================================
+                    // SAVE USER
+                    // ==================================
 
                     localStorage.setItem(
                         "airiq_user",
@@ -580,10 +268,100 @@ if (loginForm) {
 
 
                     console.log(
-                        "Logged in user saved:",
+                        "Logged-in user saved:",
                         result.user
                     );
 
+
+                    // ==================================
+                    // ADMIN LOGIN
+                    // ==================================
+
+                    if (
+                        result.user.is_admin === true ||
+                        result.user.role === "admin"
+                    ) {
+
+                        console.log(
+                            "Administrator login detected."
+                        );
+
+
+                        // ----------------------------------
+                        // SAVE ADMIN INFORMATION
+                        // ----------------------------------
+
+                        localStorage.setItem(
+                            "airiq_admin",
+
+                            JSON.stringify({
+
+                                id:
+                                    result.user.id,
+
+                                name:
+                                    result.user.name,
+
+                                email:
+                                    result.user.email
+
+                            })
+                        );
+
+
+                        // ----------------------------------
+                        // ADMIN SUCCESS MESSAGE
+                        // ----------------------------------
+
+                        if (message) {
+
+                            message.textContent =
+                                "Administrator login successful! Opening Admin Panel...";
+
+                        }
+
+
+                        // ----------------------------------
+                        // REDIRECT TO ADMIN PANEL
+                        // ----------------------------------
+
+                        setTimeout(
+                            () => {
+
+                                window.location.replace(
+                                    "/admin"
+                                );
+
+                            },
+
+                            500
+                        );
+
+
+                        return;
+
+                    }
+
+
+                    // ==================================
+                    // NORMAL USER LOGIN
+                    // ==================================
+
+                    console.log(
+                        "Normal user login detected."
+                    );
+
+
+                    // Remove any previous admin session
+
+                    localStorage.removeItem(
+                        "airiq_admin"
+                    );
+
+
+                    // ----------------------------------
+                    // SUCCESS MESSAGE
+                    // ----------------------------------
 
                     if (message) {
 
@@ -594,7 +372,7 @@ if (loginForm) {
 
 
                     // ----------------------------------
-                    // Redirect to dashboard
+                    // REDIRECT TO DASHBOARD
                     // ----------------------------------
 
                     setTimeout(
@@ -609,31 +387,36 @@ if (loginForm) {
                         500
                     );
 
+
+                    return;
+
                 }
 
 
-                // ----------------------------------
-                // Login failed
-                // ----------------------------------
+                // ==================================
+                // LOGIN FAILED
+                // ==================================
 
-                else {
+                console.warn(
+                    "Login failed:",
+                    result
+                );
 
-                    if (message) {
 
-                        message.textContent =
-                            result.message ||
-                            "Invalid email or password";
+                if (message) {
 
-                    }
+                    message.textContent =
+                        result.message ||
+                        "Invalid email or password";
 
                 }
 
             }
 
 
-            // ----------------------------------
-            // Connection error
-            // ----------------------------------
+            // ==================================
+            // CONNECTION / SERVER ERROR
+            // ==================================
 
             catch (error) {
 
@@ -653,6 +436,20 @@ if (loginForm) {
             }
 
 
+            // ==================================
+            // ENABLE LOGIN BUTTON AGAIN
+            // ==================================
+
+            finally {
+
+                if (loginButton) {
+
+                    loginButton.disabled = false;
+
+                }
+
+            }
+
         }
     );
 
@@ -660,26 +457,489 @@ if (loginForm) {
 
 
 // ==========================================
-// AUTO REDIRECT IF ALREADY LOGGED IN
+// SIGNUP
 // ==========================================
 
-// Only redirect from login page if user already exists
-
-const currentUser =
-    localStorage.getItem("airiq_user");
+const signupForm =
+    document.getElementById("signup-form");
 
 
-const isLoginPage =
-    document.getElementById("login-form");
+if (signupForm) {
+
+    signupForm.addEventListener(
+        "submit",
+
+        async (event) => {
+
+            event.preventDefault();
 
 
-if (
-    currentUser &&
-    isLoginPage
-) {
+            console.log(
+                "Signup form submitted"
+            );
 
-    console.log(
-        "User already logged in"
+
+            // ==================================
+            // MESSAGE
+            // ==================================
+
+            const message =
+                document.getElementById(
+                    "auth-message"
+                );
+
+
+            // ==================================
+            // GET INPUTS
+            // ==================================
+
+            const fullNameInput =
+                document.getElementById(
+                    "full-name"
+                );
+
+
+            const emailInput =
+                document.getElementById(
+                    "email"
+                );
+
+
+            const passwordInput =
+                document.getElementById(
+                    "password"
+                );
+
+
+            const roleInput =
+                document.getElementById(
+                    "role"
+                );
+
+
+            if (
+                !fullNameInput ||
+                !emailInput ||
+                !passwordInput ||
+                !roleInput
+            ) {
+
+                console.error(
+                    "Signup form fields are missing."
+                );
+
+                return;
+
+            }
+
+
+            const fullName =
+                fullNameInput.value.trim();
+
+
+            const email =
+                emailInput.value
+                    .trim()
+                    .toLowerCase();
+
+
+            const password =
+                passwordInput.value;
+
+
+            const role =
+                roleInput.value;
+
+
+            // ==================================
+            // VALIDATION
+            // ==================================
+
+            if (
+                !fullName ||
+                !email ||
+                !password ||
+                !role
+            ) {
+
+                if (message) {
+
+                    message.textContent =
+                        "Please fill in all required fields.";
+
+                }
+
+                return;
+
+            }
+
+
+            // ==================================
+            // LOADING MESSAGE
+            // ==================================
+
+            if (message) {
+
+                message.textContent =
+                    "Creating your account...";
+
+            }
+
+
+            // ==================================
+            // DISABLE BUTTON
+            // ==================================
+
+            const signupButton =
+                signupForm.querySelector(
+                    'button[type="submit"]'
+                );
+
+
+            if (signupButton) {
+
+                signupButton.disabled = true;
+
+            }
+
+
+            // ==================================
+            // SEND SIGNUP REQUEST
+            // ==================================
+
+            try {
+
+                console.log(
+                    "Sending signup request to:",
+                    `${API_BASE}/api/signup`
+                );
+
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/api/signup`,
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body: JSON.stringify({
+
+                                full_name:
+                                    fullName,
+
+                                email:
+                                    email,
+
+                                password:
+                                    password,
+
+                                role:
+                                    role
+
+                            })
+
+                        }
+                    );
+
+
+                // ==================================
+                // READ RESPONSE
+                // ==================================
+
+                let result;
+
+                try {
+
+                    result =
+                        await response.json();
+
+                } catch (jsonError) {
+
+                    console.error(
+                        "Invalid signup response:",
+                        jsonError
+                    );
+
+                    throw new Error(
+                        `Server returned an invalid response. Status: ${response.status}`
+                    );
+
+                }
+
+
+                console.log(
+                    "Signup response:",
+                    result
+                );
+
+
+                // ==================================
+                // SIGNUP SUCCESS
+                // ==================================
+
+                if (
+                    response.ok &&
+                    result.success === true
+                ) {
+
+                    if (message) {
+
+                        message.textContent =
+                            result.message ||
+                            "Account created successfully!";
+
+                    }
+
+
+                    // ----------------------------------
+                    // REDIRECT TO LOGIN
+                    // ----------------------------------
+
+                    setTimeout(
+                        () => {
+
+                            window.location.replace(
+                                "/login"
+                            );
+
+                        },
+
+                        1000
+                    );
+
+
+                    return;
+
+                }
+
+
+                // ==================================
+                // SIGNUP FAILED
+                // ==================================
+
+                if (message) {
+
+                    message.textContent =
+                        result.message ||
+                        "Could not create account.";
+
+                }
+
+            }
+
+
+            // ==================================
+            // CONNECTION ERROR
+            // ==================================
+
+            catch (error) {
+
+                console.error(
+                    "Signup error:",
+                    error
+                );
+
+
+                if (message) {
+
+                    message.textContent =
+                        "Could not connect to the server.";
+
+                }
+
+            }
+
+
+            // ==================================
+            // ENABLE BUTTON AGAIN
+            // ==================================
+
+            finally {
+
+                if (signupButton) {
+
+                    signupButton.disabled = false;
+
+                }
+
+            }
+
+        }
     );
 
 }
+
+
+// ==========================================
+// PASSWORD STRENGTH
+// ==========================================
+
+const passwordField =
+    document.getElementById("password");
+
+
+const passwordStrength =
+    document.getElementById(
+        "password-strength"
+    );
+
+
+if (
+    passwordField &&
+    passwordStrength
+) {
+
+    passwordField.addEventListener(
+        "input",
+
+        () => {
+
+            const password =
+                passwordField.value;
+
+
+            let score = 0;
+
+
+            // Minimum length
+
+            if (password.length >= 8) {
+
+                score++;
+
+            }
+
+
+            // Lowercase
+
+            if (/[a-z]/.test(password)) {
+
+                score++;
+
+            }
+
+
+            // Uppercase
+
+            if (/[A-Z]/.test(password)) {
+
+                score++;
+
+            }
+
+
+            // Number
+
+            if (/[0-9]/.test(password)) {
+
+                score++;
+
+            }
+
+
+            // Special character
+
+            if (
+                /[^A-Za-z0-9]/.test(password)
+            ) {
+
+                score++;
+
+            }
+
+
+            // ==================================
+            // STRENGTH TEXT
+            // ==================================
+
+            if (!password) {
+
+                passwordStrength.textContent =
+                    "";
+
+            }
+
+            else if (score <= 2) {
+
+                passwordStrength.textContent =
+                    "Weak password";
+
+            }
+
+            else if (score === 3) {
+
+                passwordStrength.textContent =
+                    "Medium password";
+
+            }
+
+            else {
+
+                passwordStrength.textContent =
+                    "Strong password";
+
+            }
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// CHECK EXISTING LOGIN
+// ==========================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+
+    () => {
+
+        const storedUser =
+            localStorage.getItem(
+                "airiq_user"
+            );
+
+
+        if (storedUser) {
+
+            try {
+
+                const user =
+                    JSON.parse(
+                        storedUser
+                    );
+
+
+                console.log(
+                    "Existing AirIQ session:",
+                    user
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Invalid stored user data:",
+                    error
+                );
+
+
+                localStorage.removeItem(
+                    "airiq_user"
+                );
+
+            }
+
+        }
+
+    }
+);

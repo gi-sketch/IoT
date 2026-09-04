@@ -50,3 +50,6 @@ tests/
 
 # Frontend libraries
 frontend/chart.umd.min.js
+
+# Admin creation script
+create_admin.py
